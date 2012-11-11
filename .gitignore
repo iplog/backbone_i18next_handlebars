@@ -1,0 +1,28 @@
+###
+# Mac OS X directory preferences
+###
+.DS_Store
+.localized
+
+###
+# node_modules
+###
+node_modules
+
+###
+# gziped files
+###
+*.gz
+
+###
+# Git merge files
+###
+*.orig
+
+###
+# system SWAP, TMP and BACKUP files
+###
+*~
+*.swp
+*.bak
+
