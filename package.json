@@ -12,6 +12,7 @@
   "dependencies": {
     "grunt-handlebars": "0.0.6",
     "grunt-contrib": "0.3.0",
-    "express": "3.x"
+    "express": "3.x",
+    "equirejs": "2.1.1"
   }
 }
