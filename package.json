@@ -13,6 +13,6 @@
     "grunt-handlebars": "0.0.6",
     "grunt-contrib": "0.3.0",
     "express": "3.x",
-    "equirejs": "2.1.1"
+    "requirejs": "2.1.1"
   }
 }
