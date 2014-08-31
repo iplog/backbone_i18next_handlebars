@@ -1,0 +1,23 @@
+{
+  "strict": true,
+  "node": true,
+  "browser": true,
+
+  "forin": true,
+
+  "indent": 2,
+  "maxdepth": 4,
+
+  "eqeqeq": true,
+  "newcap": true,
+  "immed": true,
+  "undef": true,
+  "unused": true,
+  "latedef": true,
+  "curly": true,
+  "trailing": true,
+  "quotmark": "single",
+  "noarg" : true,
+  "globals": {
+  }
+}

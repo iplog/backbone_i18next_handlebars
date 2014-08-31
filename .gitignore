@@ -5,12 +5,12 @@
 .localized
 
 ###
-# node_modules
+# Node modules
 ###
 node_modules
 
 ###
-# gziped files
+# Gziped files
 ###
 *.gz
 
@@ -20,9 +20,18 @@ node_modules
 *.orig
 
 ###
-# system SWAP, TMP and BACKUP files
+# System SWAP, TMP and BACKUP files
 ###
 *~
 *.swp
 *.bak
 
+###
+# Dist folder
+###
+my_app/www/dist
+
+###
+# Compiled handlebars templates
+###
+*/templates/*.js
