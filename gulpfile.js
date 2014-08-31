@@ -1,4 +1,7 @@
 /* jshint strict: false */
+process.env.BROWSERIFYSWAP_DIAGNOSTICS = true;
+process.env.BROWSERIFYSWAP_ENV = 'all';
+
 var path = require('path');
 
 var browserify = require('browserify');
@@ -56,7 +59,6 @@ gulp.task('watcher', function() {
   }
 
   var b = browserify(path.join(__dirname, mainModule), watchify.args);
-  // b.require('lodash', {expose: 'underscore'});
   var bundler = watchify(b);
 
   // Optionally, you can apply transforms
