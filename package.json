@@ -46,6 +46,9 @@
     "gulp-jshint": "^1.8.4",
     "jshint-stylish": "^0.4.0"
   },
+  "browser": {
+    "handlebars": "./my_app/shims/handlebars_runtime.js"
+  },
   "browserify": {
     "transform": [
       "browserify-swap"
