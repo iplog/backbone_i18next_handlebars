@@ -35,3 +35,8 @@ my_app/www/dist
 # Compiled handlebars templates
 ###
 */templates/*.js
+
+###
+# Code coverage
+###
+.coverage

@@ -41,6 +41,7 @@
     "watchify": "^1.0.2"
   },
   "devDependencies": {
+    "browserify-istanbul": "^0.1.2",
     "chai": "^1.9.1",
     "connect-history-api-fallback": "0.0.4",
     "gulp-connect": "^2.0.6",
