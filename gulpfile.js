@@ -1,5 +1,5 @@
 /* jshint strict: false */
-process.env.BROWSERIFYSWAP_DIAGNOSTICS = true;
+// process.env.BROWSERIFYSWAP_DIAGNOSTICS = true;
 process.env.BROWSERIFYSWAP_ENV = 'all';
 
 var path = require('path');
@@ -12,6 +12,7 @@ var gutil = require('gulp-util');
 var handlebars = require('gulp-handlebars');
 var historyApiFallback = require('connect-history-api-fallback');
 var jshint = require('gulp-jshint');
+var karma = require('karma').server;
 var less = require('gulp-less');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
@@ -51,18 +52,22 @@ gulp.task('lint', function() {
 
 gulp.task('watcher', function() {
   function rebundle() {
+    gutil.log('Update main bundle...');
     return bundler.bundle()
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source(bundleFile))
-      .pipe(gulp.dest(path.join(__dirname, appName, webFolder, distFolder)));
+      .pipe(gulp.dest(path.join(__dirname, appName, webFolder, distFolder)))
+      .pipe(connect.reload());
   }
 
-  var b = browserify(path.join(__dirname, mainModule), watchify.args);
+  var opts = Object.create(watchify.args);
+  opts.debug = true;
+
+  var b = browserify(path.join(__dirname, mainModule), opts);
   var bundler = watchify(b);
 
-  // Optionally, you can apply transforms
-  // and other configuration options on the
+  // Optionally, you can apply transforms and other configuration options on the
   // bundler just as you would with browserify
   bundler.transform('brfs');
   bundler.on('update', rebundle);
@@ -73,8 +78,7 @@ gulp.task('handlebars', function(){
   gulp.src(paths.templates)
     .pipe(handlebars())
     .pipe(defineModule('node'))
-    .pipe(gulp.dest(__dirname))
-    .pipe(connect.reload());
+    .pipe(gulp.dest(__dirname));
 });
 
 gulp.task('webserver', function() {
@@ -91,9 +95,26 @@ gulp.task('webserver', function() {
 gulp.task('watch', function() {
   gulp.watch(paths.less, [ 'less' ]);
   gulp.watch(paths.templates, [ 'handlebars' ]);
-  // gulp.watch(paths.scripts, [ 'reload' ]);
 });
 
-gulp.task('dev', [ 'webserver', 'default', 'watcher', 'watch' ]);
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
+gulp.task('tdd', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
+  }, done);
+});
+
+gulp.task('dev', [
+  'webserver',
+  'default',
+  'watcher',
+  'watch',
+]);
 
 gulp.task('default', [ 'less', 'handlebars' ]);
